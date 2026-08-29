@@ -131,11 +131,13 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label fw-semibold text-secondary small">Kata Sandi</label>
+                                            <label for="yourPassword" class="form-label fw-semibold">Password</label>
                                             <div class="input-group">
-                                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                                                    id="yourPassword" placeholder="••••••••" required>
+                                                <input type="password" name="password" class="form-control" id="yourPassword"
+                                                    placeholder="Masukkan password..." required>
+                                                <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan Password">
+                                                    <i class="bi bi-eye"></i>
+                                                </button>
                                             </div>
                                         </div>
 
@@ -176,6 +178,23 @@
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        document.querySelectorAll('.btn-toggle-password').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const input = this.closest('.input-group').querySelector('input');
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

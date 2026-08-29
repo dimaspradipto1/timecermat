@@ -100,6 +100,56 @@
         @yield('content')
     </main><!-- End #main -->
 
+    <!-- Modal Ubah Password Akun Sendiri -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold" id="changePasswordModalLabel"><i class="bi bi-key-fill text-warning me-2"></i> Ubah Password Akun</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formGlobalChangePassword" action="{{ route('dashboard.change-password') }}" method="POST">
+                    @csrf
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="myCurrentPassword" class="form-label fw-semibold">Password Saat Ini <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="myCurrentPassword" name="current_password" placeholder="Masukkan password saat ini..." required>
+                                <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="myNewPassword" class="form-label fw-semibold">Password Baru <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="myNewPassword" name="password" placeholder="Minimal 6 karakter" required minlength="6">
+                                <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="myNewPasswordConfirmation" class="form-label fw-semibold">Konfirmasi Password Baru <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="myNewPasswordConfirmation" name="password_confirmation" placeholder="Ulangi password baru..." required minlength="6">
+                                <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-warning text-dark fw-bold px-4"><i class="bi bi-check-circle me-1"></i> Perbarui Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @include('layouts.dashboard.footer')
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
@@ -129,6 +179,58 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+
+        // Global Password Toggle Handler
+        $(document).on('click', '.btn-toggle-password', function() {
+            let input = $(this).closest('.input-group').find('input');
+            let icon = $(this).find('i');
+            if (input.attr('type') === 'password') {
+                input.attr('type', 'text');
+                icon.removeClass('bi-eye').addClass('bi-eye-slash');
+            } else {
+                input.attr('type', 'password');
+                icon.removeClass('bi-eye-slash').addClass('bi-eye');
+            }
+        });
+
+        // Handle Global Change Password Form
+        $('#formGlobalChangePassword').submit(function(e) {
+            e.preventDefault();
+            let form = $(this);
+            let actionUrl = form.attr('action');
+
+            $.ajax({
+                url: actionUrl,
+                type: "POST",
+                data: form.serialize(),
+                success: function(res) {
+                    $('#changePasswordModal').modal('hide');
+                    form[0].reset();
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: res.message || 'Password Anda telah berhasil diperbarui.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                },
+                error: function(xhr) {
+                    let errorMsg = 'Terjadi kesalahan saat mengubah password.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMsg = xhr.responseJSON.message;
+                    } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        let firstErrorKey = Object.keys(xhr.responseJSON.errors)[0];
+                        errorMsg = xhr.responseJSON.errors[firstErrorKey][0];
+                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal Memperbarui Password',
+                        text: errorMsg
+                    });
+                }
+            });
         });
     </script>
 

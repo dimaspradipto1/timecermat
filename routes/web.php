@@ -31,6 +31,7 @@ Route::middleware(['auth', 'checkrole:admin'])->group(function () {
     // Main Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/index', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::post('/dashboard/change-password', [AuthController::class, 'changePassword'])->name('dashboard.change-password');
 
     // Schools CRUD with DataTables & SweetAlert
     Route::post('/dashboard/schools/{school}/adjust-score', [SchoolsController::class, 'adjustScore'])->name('dashboard.schools.adjust-score');

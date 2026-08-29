@@ -71,7 +71,12 @@
 
                     <div class="mb-3">
                         <label for="addUserPassword" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="addUserPassword" name="password" placeholder="Minimal 6 karakter" required minlength="6">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="addUserPassword" name="password" placeholder="Minimal 6 karakter" required minlength="6">
+                            <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan Password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -114,9 +119,25 @@
                         <input type="email" class="form-control" id="editUserEmail" name="email" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="editUserPassword" class="form-label fw-semibold">Password Baru <small class="text-muted">(Kosongkan jika tidak diubah)</small></label>
-                        <input type="password" class="form-control" id="editUserPassword" name="password" placeholder="Minimal 6 karakter" minlength="6">
+                    <div class="mb-3 p-3 bg-light rounded-3 border">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="toggleEditPassword">
+                            <label class="form-check-label fw-semibold text-dark" for="toggleEditPassword">
+                                <i class="bi bi-shield-lock me-1"></i> Ubah Password Akun Ini?
+                            </label>
+                        </div>
+                        <div id="containerEditPassword" class="mt-2" style="display: none;">
+                            <label for="editUserPassword" class="form-label small text-muted fw-semibold">Masukkan Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="editUserPassword" name="password" placeholder="Minimal 6 karakter" minlength="6" disabled>
+                                <button class="btn btn-outline-secondary btn-toggle-password" type="button" title="Lihat/Sembunyikan Password">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div class="text-muted small fst-italic mt-1">
+                                <i class="bi bi-info-circle me-1"></i> Jika dinonaktifkan, akun ini akan tetap menggunakan password yang lama.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -160,6 +181,19 @@
             reloadUsersTable();
         });
 
+        // Toggle Show/Hide Password
+        $(document).on('click', '.btn-toggle-password', function() {
+            let input = $(this).closest('.input-group').find('input');
+            let icon = $(this).find('i');
+            if (input.attr('type') === 'password') {
+                input.attr('type', 'text');
+                icon.removeClass('bi-eye').addClass('bi-eye-slash');
+            } else {
+                input.attr('type', 'password');
+                icon.removeClass('bi-eye-slash').addClass('bi-eye');
+            }
+        });
+
         // Handle Add User Form Submit via AJAX
         $('#formAddUser').submit(function(e) {
             e.preventDefault();
@@ -198,6 +232,17 @@
             });
         });
 
+        // Handle toggleEditPassword switch change
+        $('#toggleEditPassword').change(function() {
+            if ($(this).is(':checked')) {
+                $('#containerEditPassword').slideDown(200);
+                $('#editUserPassword').prop('disabled', false).focus();
+            } else {
+                $('#containerEditPassword').slideUp(200);
+                $('#editUserPassword').val('').prop('disabled', true);
+            }
+        });
+
         // Handle Edit User button click
         $(document).on('click', '.btn-edit-user', function() {
             let id = $(this).data('id');
@@ -210,7 +255,11 @@
             $('#editUserName').val(name);
             $('#editUserEmail').val(email);
             $('#editUserRole').val(role);
-            $('#editUserPassword').val('');
+
+            // Reset password field to hidden/disabled
+            $('#toggleEditPassword').prop('checked', false);
+            $('#containerEditPassword').hide();
+            $('#editUserPassword').val('').prop('disabled', true);
 
             $('#editUserModal').modal('show');
         });

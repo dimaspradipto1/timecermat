@@ -46,6 +46,46 @@ class AuthController extends Controller
         return back()->withInput($request->only('login', 'remember'));
     }
 
+    public function changePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
+        ], [
+            'current_password.required' => 'Password saat ini wajib diisi.',
+            'password.required' => 'Password baru wajib diisi.',
+            'password.min' => 'Password baru minimal 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
+        ]);
+
+        /** @var \App\Models\User $user */
+        $user = \App\Models\User::find(Auth::id());
+
+        if (!\Illuminate\Support\Facades\Hash::check($validated['current_password'], $user->password)) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Password saat ini yang Anda masukkan salah.',
+                ], 422);
+            }
+            Alert::error('Gagal', 'Password saat ini yang Anda masukkan salah.');
+            return back();
+        }
+
+        $user->password = \Illuminate\Support\Facades\Hash::make($validated['password']);
+        $user->save();
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Password Anda berhasil diperbarui!',
+            ]);
+        }
+
+        Alert::success('Berhasil', 'Password Anda berhasil diperbarui!');
+        return back();
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

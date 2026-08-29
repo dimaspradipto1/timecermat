@@ -30,7 +30,7 @@ class SchoolsDataTable extends DataTable
                 $badgeClass = match ($row->regu) {
                     'Regu A' => 'bg-primary text-white',
                     'Regu B' => 'bg-success text-white',
-                    'Regu C' => 'bg-danger text-white',
+                    'Regu C' => 'bg-warning text-white',
                     'Regu D' => 'bg-info text-dark',
                     'Regu E' => 'bg-secondary text-white',
                     default => 'bg-dark text-white',

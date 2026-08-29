@@ -155,6 +155,22 @@ class TimeCermatTest extends TestCase
         $this->assertNull(User::find($createdUser->id));
     }
 
+    public function test_user_can_change_own_password(): void
+    {
+        $admin = User::where('email', 'admin@gmail.com')->first();
+
+        $response = $this->actingAs($admin)->postJson('/dashboard/change-password', [
+            'current_password' => 'password',
+            'password' => 'newpassword123',
+            'password_confirmation' => 'newpassword123',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJson(['success' => true]);
+
+        $this->assertTrue(Hash::check('newpassword123', User::find($admin->id)->password));
+    }
+
     public function test_timer_api_control(): void
     {
         $response = $this->postJson('/api/stage-timer', [

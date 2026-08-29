@@ -47,6 +47,16 @@
             </li>
 
             <li>
+              <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                <i class="bi bi-key-fill text-warning"></i>
+                <span>Ubah Password</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
               <form action="{{ route('logout') }}" method="POST" id="logout-header-form">
                 @csrf
                 <button type="button" class="dropdown-item d-flex align-items-center text-danger" onclick="confirmLogout()">

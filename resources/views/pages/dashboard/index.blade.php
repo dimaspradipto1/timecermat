@@ -219,10 +219,10 @@
 
         <!-- Slot 3 (Kanan) -->
         <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm h-100" style="border-top: 5px solid #ea580c !important; border-radius: 12px;">
+            <div class="card border-0 shadow-sm h-100" style="border-top: 5px solid #ffc107 !important; border-radius: 12px;">
                 <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <span class="badge text-white px-3 py-2 fs-6 fw-bold shadow-sm" style="background-color: #ea580c;"><i class="bi bi-display me-1"></i> SLOT 3 (KANAN)</span>
-                    <span class="badge text-white fs-6 px-3 py-1 fw-bold shadow-sm" style="background-color: #ea580c;" id="slot3ReguBadge">{{ $slot3->regu ?? 'Regu C' }}</span>
+                    <span class="badge bg-warning text-white px-3 py-2 fs-6 fw-bold shadow-sm"><i class="bi bi-display me-1"></i> SLOT 3 (KANAN)</span>
+                    <span class="badge bg-warning text-white fs-6 px-3 py-1 fw-bold shadow-sm" id="slot3ReguBadge">{{ $slot3->regu ?? 'Regu C' }}</span>
                 </div>
                 <div class="card-body p-4 text-center">
                     <div class="mb-3">
@@ -244,7 +244,7 @@
 
                     <div class="my-3">
                         <div class="text-muted small fw-bold">SKOR SAAT INI</div>
-                        <div class="display-3 fw-bold text-warning-emphasis" id="slot3ScoreDisplay">{{ $slot3->score ?? 0 }}</div>
+                        <div class="display-3 fw-bold text-warning" id="slot3ScoreDisplay">{{ $slot3->score ?? 0 }}</div>
                     </div>
 
                     <!-- Quick Score Buttons -->
