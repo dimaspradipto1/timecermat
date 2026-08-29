@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>UIS Grand Academic Challenge 2026 - Layar Panggung</title>
     <meta content="Layar Panggung Cerdas Cermat UIS Grand Academic Challenge SLTA Se-Kota Batam 2026" name="description">
 
@@ -18,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:wght@700;800;900&family=Poppins:wght@600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 
     <style>
@@ -448,6 +451,12 @@
         }
 
         $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             // High frequency polling (400ms) for instant real-time synchronization
             setInterval(pollStageData, 400);
 
