@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SchoolsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,5 +38,11 @@ Route::middleware(['auth', 'checkrole:admin'])->group(function () {
     Route::resource('/dashboard/schools', SchoolsController::class, [
         'names' => 'dashboard.schools',
         'parameters' => ['schools' => 'school']
+    ]);
+
+    // Users CRUD with DataTables & SweetAlert
+    Route::resource('/dashboard/users', UsersController::class, [
+        'names' => 'dashboard.users',
+        'parameters' => ['users' => 'user']
     ]);
 });

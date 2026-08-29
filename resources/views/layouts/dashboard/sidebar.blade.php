@@ -21,6 +21,13 @@
         </a>
       </li><!-- End Schools Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? '' : 'collapsed' }}" href="{{ route('dashboard.users.index') }}">
+          <i class="bi bi-people-fill"></i>
+          <span>Data Pengguna</span>
+        </a>
+      </li><!-- End Users Nav -->
+
       <li class="nav-heading">Layar Tampilan</li>
 
       <li class="nav-item">

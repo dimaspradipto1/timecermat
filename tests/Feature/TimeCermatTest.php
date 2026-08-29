@@ -113,6 +113,48 @@ class TimeCermatTest extends TestCase
         $this->assertNull(Schools::find($school->id));
     }
 
+    public function test_users_datatables_endpoint(): void
+    {
+        $admin = User::where('email', 'admin@gmail.com')->first();
+        $response = $this->actingAs($admin)->getJson('/dashboard/users', [
+            'HTTP_X-Requested-With' => 'XMLHttpRequest'
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['data']);
+    }
+
+    public function test_admin_can_create_update_and_delete_user(): void
+    {
+        $admin = User::where('email', 'admin@gmail.com')->first();
+
+        // Create
+        $response = $this->actingAs($admin)->post('/dashboard/users', [
+            'name' => 'Operator Test',
+            'email' => 'operator@example.com',
+            'password' => 'secret123',
+            'role' => 'operator',
+        ]);
+        $response->assertRedirect('/dashboard/users');
+
+        $createdUser = User::where('email', 'operator@example.com')->first();
+        $this->assertNotNull($createdUser);
+        $this->assertEquals('operator', $createdUser->role);
+
+        // Update
+        $updateResponse = $this->actingAs($admin)->putJson("/dashboard/users/{$createdUser->id}", [
+            'name' => 'Operator Updated',
+            'email' => 'operator@example.com',
+            'role' => 'juri',
+        ]);
+        $updateResponse->assertJson(['success' => true]);
+
+        // Delete
+        $deleteResponse = $this->actingAs($admin)->deleteJson("/dashboard/users/{$createdUser->id}");
+        $deleteResponse->assertJson(['success' => true]);
+        $this->assertNull(User::find($createdUser->id));
+    }
+
     public function test_timer_api_control(): void
     {
         $response = $this->postJson('/api/stage-timer', [
