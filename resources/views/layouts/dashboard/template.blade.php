@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Dashboard') - Cerdas Cermat UIS 2026</title>
+    <title>@yield('title', 'Dashboard') - Cerdas Cermat UIS {{ date('Y') }}</title>
     <meta content="Dashboard Administrator Cerdas Cermat UIS Grand Academic Challenge" name="description">
 
     <!-- Favicons -->

@@ -13,9 +13,12 @@
             </ol>
         </nav>
     </div>
-    <div>
+    <div class="d-flex gap-2">
+        <a href="{{ route('dashboard.rekapitulasi.index') }}" class="btn btn-warning text-dark fw-bold shadow-sm">
+            <i class="bi bi-trophy-fill me-1"></i> Rekapitulasi Juara
+        </a>
         <a href="{{ route('beranda') }}" target="_blank" class="btn btn-uis-primary shadow-sm">
-            <i class="bi bi-display me-1"></i> Buka Layar Panggung <i class="bi bi-box-arrow-up-right ms-1"></i>
+            <i class="bi bi-display me-1"></i> Layar Panggung <i class="bi bi-box-arrow-up-right ms-1"></i>
         </a>
     </div>
 </div><!-- End Page Title -->

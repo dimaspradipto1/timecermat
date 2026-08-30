@@ -101,7 +101,7 @@
                                 <div class="login-header">
                                     <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo UIS" class="mb-2">
                                     <h5 class="fw-bold mb-0 text-uppercase tracking-wider">UIS Grand Academic Challenge</h5>
-                                    <small class="text-warning fw-semibold">Portal Administrator Cerdas Cermat 2026</small>
+                                    <small class="text-warning fw-semibold">Portal Administrator Cerdas Cermat {{ date('Y') }}</small>
                                 </div>
 
                                 <div class="card-body p-4 pt-4">
@@ -165,7 +165,7 @@
                             </div>
 
                             <div class="text-center text-white-50 small mt-2">
-                                &copy; 2026 <strong>Universitas Ibnu Sina</strong>. Grand Academic Challenge.
+                                &copy; {{ date('Y') }} <strong>Universitas Ibnu Sina</strong>. Grand Academic Challenge.
                             </div>
 
                         </div>

@@ -12,7 +12,7 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-heading">Master Data</li>
+      <li class="nav-heading">Master Data & Hasil</li>
 
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('dashboard.schools.*') ? '' : 'collapsed' }}" href="{{ route('dashboard.schools.index') }}">
@@ -20,6 +20,13 @@
           <span>Data Sekolah</span>
         </a>
       </li><!-- End Schools Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('dashboard.rekapitulasi.*') ? '' : 'collapsed' }}" href="{{ route('dashboard.rekapitulasi.index') }}">
+          <i class="bi bi-trophy-fill text-warning"></i>
+          <span>Rekapitulasi Juara</span>
+        </a>
+      </li><!-- End Rekapitulasi Nav -->
 
       <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('dashboard.users.*') ? '' : 'collapsed' }}" href="{{ route('dashboard.users.index') }}">
@@ -34,6 +41,13 @@
         <a class="nav-link collapsed text-success" href="{{ route('beranda') }}" target="_blank">
           <i class="bi bi-display text-success"></i>
           <span>Layar Panggung (Beranda) <i class="bi bi-box-arrow-up-right ms-auto"></i></span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed text-warning" href="{{ route('stage.juara') }}" target="_blank">
+          <i class="bi bi-trophy-fill text-warning"></i>
+          <span>Layar Juara (Panggung) <i class="bi bi-box-arrow-up-right ms-auto"></i></span>
         </a>
       </li>
 

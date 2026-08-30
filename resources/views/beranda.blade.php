@@ -7,8 +7,8 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>UIS Grand Academic Challenge 2026 - Layar Panggung</title>
-    <meta content="Layar Panggung Cerdas Cermat UIS Grand Academic Challenge SLTA Se-Kota Batam 2026" name="description">
+    <title>UIS Grand Academic Challenge {{ date('Y') }} - Layar Panggung</title>
+    <meta content="Layar Panggung Cerdas Cermat UIS Grand Academic Challenge SLTA Se-Kota Batam {{ date('Y') }}" name="description">
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/logouis.png') }}" rel="icon">
@@ -232,6 +232,9 @@
 
         <!-- Top Right Control Bar -->
         <div class="stage-controls">
+            <a href="{{ route('stage.juara') }}" target="_blank" class="btn-ctrl" title="Layar Juara 1, 2, 3">
+                <i class="bi bi-trophy-fill text-warning"></i> <span class="d-none d-md-inline">Juara</span>
+            </a>
             <button type="button" class="btn-ctrl" id="btnToggleSound" title="Buzzer Suara">
                 <i class="bi bi-volume-up-fill" id="soundIcon"></i> <span id="soundText">Suara ON</span>
             </button>
