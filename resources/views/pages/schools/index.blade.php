@@ -169,6 +169,7 @@
                 <div class="fw-bold text-dark mb-1" id="quickScoreSchoolName">Nama Sekolah</div>
                 <div class="display-5 fw-bold text-success my-2" id="quickScoreCurrent">0</div>
                 <div class="d-flex flex-wrap gap-2 justify-content-center mt-3">
+                    <button type="button" class="btn btn-sm btn-outline-success btn-modal-adj" data-act="add" data-val="5">+5</button>
                     <button type="button" class="btn btn-sm btn-outline-success btn-modal-adj" data-act="add" data-val="10">+10</button>
                     <button type="button" class="btn btn-sm btn-outline-success btn-modal-adj" data-act="add" data-val="50">+50</button>
                     <button type="button" class="btn btn-sm btn-outline-success btn-modal-adj" data-act="add" data-val="100">+100</button>
