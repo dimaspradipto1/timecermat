@@ -57,6 +57,10 @@ Sistem ini dirancang khusus untuk memfasilitasi jalannya kompetisi cerdas cermat
 - Autentikasi berbasis session dengan middleware proteksi role (`checkrole:admin`).
 - CRUD akun administrator dan fitur ubah password admin.
 
+### 7. 💾 Backup & Pemulihan Sistem (Database & Storage)
+- **Ekspor & Impor Database SQL:** Mengunduh backup struktur tabel dan data MySQL secara instan serta memulihkan data dengan opsi sinkronisasi total (*wipe before import*).
+- **Backup & Impor Storage Public ZIP:** Mengarsipkan seluruh berkas lampiran dan dokumen publik (`storage/app/public`) ke format ZIP yang aman.
+
 ---
 
 ## 🛠️ Teknologi yang Digunakan
@@ -86,6 +90,11 @@ Sistem ini dirancang khusus untuk memfasilitasi jalannya kompetisi cerdas cermat
 | `/dashboard/rekapitulasi` | `GET` | Auth, Role Admin | Halaman rekapitulasi nilai dan pemenang |
 | `/dashboard/rekapitulasi/cetak` | `GET` | Auth, Role Admin | Format cetak dokumen resmi rekapitulasi |
 | `/dashboard/users` | `RESOURCE` | Auth, Role Admin | Manajemen akun admin |
+| `/dashboard/backup` | `GET` | Auth, Role Admin | Panel backup & restore database serta storage |
+| `/dashboard/backup/export` | `GET` | Auth, Role Admin | Ekspor cadangan database MySQL (.sql) |
+| `/dashboard/backup/import` | `POST` | Auth, Role Admin | Impor & pulihkan database MySQL (.sql) |
+| `/dashboard/backup/storage-public` | `GET` | Auth, Role Admin | Ekspor cadangan folder storage public (.zip) |
+| `/dashboard/backup/storage-public/import` | `POST` | Auth, Role Admin | Impor & pulihkan berkas storage public (.zip) |
 | `/api/stage-data` | `GET` | Public | Endpoint data real-time untuk layar panggung |
 | `/api/stage-timer` | `POST` | Public | Endpoint kontrol timer layar panggung |
 

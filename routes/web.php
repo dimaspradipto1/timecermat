@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DatabaseBackupController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\RekapitulasiController;
 use App\Http\Controllers\SchoolsController;
@@ -53,4 +54,13 @@ Route::middleware(['auth', 'checkrole:admin'])->group(function () {
         'names' => 'dashboard.users',
         'parameters' => ['users' => 'user']
     ]);
+
+    // Backup & Restore Database & Storage
+    Route::prefix('/dashboard/backup')->name('dashboard.backup.')->group(function () {
+        Route::get('/', [DatabaseBackupController::class, 'index'])->name('index');
+        Route::get('/export', [DatabaseBackupController::class, 'export'])->name('export');
+        Route::post('/import', [DatabaseBackupController::class, 'import'])->name('import');
+        Route::get('/storage-public', [DatabaseBackupController::class, 'exportPublicStorage'])->name('storage-public');
+        Route::post('/storage-public/import', [DatabaseBackupController::class, 'importPublicStorage'])->name('storage-public.import');
+    });
 });

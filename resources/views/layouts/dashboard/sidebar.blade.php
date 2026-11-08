@@ -35,6 +35,13 @@
         </a>
       </li><!-- End Users Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('dashboard.backup.*') ? '' : 'collapsed' }}" href="{{ route('dashboard.backup.index') }}">
+          <i class="bi bi-cloud-arrow-down-fill text-primary"></i>
+          <span>Backup Database</span>
+        </a>
+      </li><!-- End Backup Nav -->
+
       <li class="nav-heading">Layar Tampilan</li>
 
       <li class="nav-item">
