@@ -170,3 +170,4 @@ class DatabaseBackupController extends Controller
         abort_unless($user && ($user->isAdmin() || $user->role === 'admin'), 403);
     }
 }
+

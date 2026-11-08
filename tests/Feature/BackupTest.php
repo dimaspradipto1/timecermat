@@ -53,3 +53,4 @@ class BackupTest extends TestCase
         $response->assertHeader('content-type', 'application/zip');
     }
 }
+

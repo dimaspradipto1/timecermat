@@ -353,3 +353,4 @@ class DatabaseBackupService
         return '`' . str_replace('`', '``', $identifier) . '`';
     }
 }
+
