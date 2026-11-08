@@ -47,15 +47,87 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f6f9ff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .pagetitle h1 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .pagetitle .breadcrumb {
+            font-size: 0.8125rem; /* 13px */
+            font-weight: 400;
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1e293b;
         }
 
         .header {
             border-bottom: 2px solid #10b981;
         }
 
+        /* Sidebar Professional Typography & Layout */
+        .sidebar {
+            width: 300px;
+            padding: 16px 14px;
+        }
+
+        .sidebar-nav .nav-heading {
+            font-size: 0.6875rem; /* 11px */
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #8da2bd;
+            margin: 14px 0 6px 12px;
+            padding: 0;
+        }
+
+        .sidebar-nav .nav-item {
+            margin-bottom: 3px;
+        }
+
         .sidebar-nav .nav-link {
+            font-size: 0.845rem; /* 13.5px */
+            font-weight: 500;
+            padding: 8px 12px;
             border-radius: 8px;
-            margin-bottom: 4px;
+            color: #334155;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .sidebar-nav .nav-link i {
+            font-size: 1.05rem; /* ~16.8px */
+            width: 22px;
+            margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #64748b;
+        }
+
+        .sidebar-nav .nav-link.collapsed {
+            color: #334155;
+            background: transparent;
+        }
+
+        .sidebar-nav .nav-link.collapsed:hover {
+            color: #047857;
+            background-color: #f1f5f9;
+        }
+
+        .sidebar-nav .nav-link.collapsed:hover i {
+            color: #047857;
         }
 
         .sidebar-nav .nav-link.active,
@@ -65,8 +137,17 @@
             font-weight: 600;
         }
 
-        .sidebar-nav .nav-link i {
-            font-size: 18px;
+        .sidebar-nav .nav-link.active i,
+        .sidebar-nav .nav-link:not(.collapsed) i {
+            color: #047857;
+        }
+
+        .sidebar-nav .nav-link .external-link-icon {
+            font-size: 0.72rem;
+            margin-left: auto;
+            margin-right: 0 !important;
+            opacity: 0.65;
+            width: auto !important;
         }
 
         .btn-uis-primary {

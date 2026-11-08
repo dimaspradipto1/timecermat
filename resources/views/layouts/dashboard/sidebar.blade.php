@@ -47,14 +47,16 @@
       <li class="nav-item">
         <a class="nav-link collapsed text-success" href="{{ route('beranda') }}" target="_blank">
           <i class="bi bi-display text-success"></i>
-          <span>Layar Panggung (Beranda) <i class="bi bi-box-arrow-up-right ms-auto"></i></span>
+          <span>Layar Panggung (Beranda)</span>
+          <i class="bi bi-box-arrow-up-right external-link-icon"></i>
         </a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link collapsed text-warning" href="{{ route('stage.juara') }}" target="_blank">
           <i class="bi bi-trophy-fill text-warning"></i>
-          <span>Layar Juara (Panggung) <i class="bi bi-box-arrow-up-right ms-auto"></i></span>
+          <span>Layar Juara (Panggung)</span>
+          <i class="bi bi-box-arrow-up-right external-link-icon"></i>
         </a>
       </li>
 
